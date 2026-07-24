@@ -2,6 +2,7 @@
 from flask import Flask, request, jsonify, render_template
 import pandas as pd
 
+print("sunny")
 app = Flask(__name__)
 
 # Load dataset
@@ -17,6 +18,10 @@ def home():
 def chat():
 
     question = request.json["message"].lower().strip()
+    from datetime import datetime
+
+    with open("user_queries.txt", "a") as file:
+     file.write(f"{datetime.now()} : {question}\n")
 
     # Highest calories
     if "highest calories" in question:
@@ -68,3 +73,5 @@ Flavor : {item['Flavor_Profile']}
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+print("sunny")
